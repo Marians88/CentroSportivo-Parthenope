@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+	<meta charset="UTF-8">
+	<title>Agenda</title>
+	<link rel="stylesheet"= href="{{url_for('static',filename='css/bootstrap.min.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/agenda.css')}}">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+  </head>
+</head>
+
+<body id="bodyid">
+
+   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{{url_for('home')}}">Indietro</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <br></br> 
+   <div class="mobile-wrapper">
+
+   <!--======= Header =======-->
+
+   <header class="header">
+      <div class="container">
+         <span>Bentornato!</span>
+         <h1>La tua agenda</h1>
+
+         <div class="menu-toggle">
+            <div>
+               <span></span>
+               <span></span>
+               <span></span>
+            </div>
+         </div>
+      </div>
+   </header>
+
+   <!--======= Today =======-->
+
+   <section class="today-box" id="today-box">
+      <span class="breadcrumb"></span>
+      <h2> La data di oggi:</h2>
+      <h3 id="date-title"> </h3>
+
+      <div class="plus-icon">
+         <i class="ion ion-ios-add"></i>
+	 <p>Il meteo di oggi:</p>
+	 <p id="meteo"></p>
+	 <img id="icona" width="40" height="40"></img>  	
+      </div>
+   </section>
+
+   <!--======= Upcoming Events =======-->
+
+   <section class="upcoming-events">
+      <div class="container">
+         <h3>
+            Le tue prenotazioni
+
+         </h3>
+	 {% set pren = session.database.prenotazione.find({'user':session['username']}) %}	  
+		 	{% for p in pren%} 	
+         		<div class="events-wrapper">
+            			<div class="event">
+               				<i class="ion ion-ios-flame hot"></i>
+               				<h4 class="event__point">Campo: {{ p.campo }} </h4>
+               				Mese: <span id="event__duration1" name="mese">{{p.mese}}</span> 
+	       				Giorno: <span id="event__duration2" name="giorno" >{{p.giorno}}</span>
+	       				Ora: <span id="event__duration3" name="ora">{{p.ora}}</span>:00		
+            			</div>
+				<form method="POST" action="{{url_for('elimina')}}" >   
+				<button class="add-event-button" name=bottone type=submit value={{p._id}}><span class="add-event-button">Elimina</span> </button>
+				</form>    
+			</div>
+	 		{% endfor %}    		
+      </div>
+   </section>
+</div>
+	
+<script type="text/javascript">
+	var data = new Date();
+	var gg, mm, aaaa;
+	gg = data.getDate() + "/";
+	mm = data.getMonth() + 1 + "/";
+	aaaa = data.getFullYear();
+	document.getElementById("date-title").innerHTML=gg+mm+aaaa
+	
+</script>
+
+
+<script>
+  //  function getMeteo() {
+            var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                // Typical action to be performed when the document is ready:
+                var testo = JSON.parse(xhttp.responseText);
+                document.getElementById("meteo").innerHTML = testo.forecast.text.it;
+		var stringa=testo.forecast.text.it;
+		if(stringa=="Rovesci")
+		{
+			document.getElementById("icona").src="{{url_for('static',filename='images/rovesci.png')}}";
+		}
+		if(stringa=="Nuvoloso")
+		{
+			document.getElementById("icona").src="{{url_for('static',filename='images/nuvoloso.png')}}";
+		}
+		if(stringa=="Sereno")
+		{
+			document.getElementById("icona").src="{{url_for('static',filename='images/sereno.png')}}";
+		}
+		if(stringa=="Molto nuvoloso")
+		{
+			document.getElementById("icona").src="{{url_for('static',filename='images/moltonuvoloso.png')}}";
+		}	
+		
+            }
+        };
+        xhttp.open("GET", "https://api.meteo.uniparthenope.it/products/wrf5/forecast/com63041", true);
+        xhttp.send();
+    //}
+</script>
+
+<script src=" {{url_for('static',filename='js/bootstrap.min.js')}}"></script>
+</body>
+</html> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

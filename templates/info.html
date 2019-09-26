@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Info e contatti</title>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet"= href="{{url_for('static',filename='css/bootstrap.min.css')}}">
+  <!--<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
+
+  <!-- Custom styles for this template -->
+  <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/info.css')}}">
+
+   <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <h3 class="navbar-brand" >Benvenuto</h3>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('index') }}">Indietro</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <!-- Heading Row -->
+    <div class="row align-items-center my-5">
+      <div class="col-lg-7">
+        <img class="img-fluid rounded mb-4 mb-lg-0" src="{{url_for('static',filename='images/campo2.jpg')}}" alt="">
+      </div>
+      <!-- /.col-lg-8 -->
+      <div class="col-lg-5">
+        <h1 class="font-weight-light">Organizza le tue sfide con noi</h1>
+        <p>Da venti anni su i nostri campi accogliamo sfide e incontri per tutti quelli che amano correre con scarpette e pantaloncini per inseguire un pallone!Su i nostri fantastici campi potrai realizzare i tuoi sogni e sentirti per un giorno anche tu un campione! </p>
+      </div>
+      <!-- /.col-md-4 -->
+    </div>
+    <!-- /.row -->
+
+    <!-- Content Row -->
+    <div class="row">
+      <div class="col-md-4 mb-5">
+        <div class="card h-100">
+          <div class="card-body">
+            <h2 class="card-title">Contatti</h2>
+            <p class="card-text">Numero di telefono:081/5540987<br></br>Email:campo@gmail.com<br></br>Indirizzo:Via Falcone,57</p>
+          </div>
+        </div>
+      </div>    
+    
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <h2 class="card-title">Consulta la nostra mappa</h2>
+</div>
+  <div id="mapid">
+
+   </div>
+
+<script>
+var map = new L.Map('mapid');
+var url = 'http://{s}.tile.osm.org/{z}/{x}/{y}.png';
+var attrib = '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors';
+var mylayer = new L.TileLayer(url, {attribution: attrib});
+ 
+map.setView([40.899260, 14.202117],15)
+map.addLayer(mylayer);
+
+</script>
+
+<script>
+var my_marker = L.marker([40.899573, 14.202049]);
+my_marker.addTo(map);
+my_marker.bindPopup('<p>Siamo Qui !!!!</p>').openPopup();
+
+</script>
+    
+  <footer class="py-5 bg-dark">
+
+  </footer>
+
+</body>
+
+</html>

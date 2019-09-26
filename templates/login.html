@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+	<meta charset="UTF-8">
+	<title>Pagina Iniziale</title>
+	<link rel="stylesheet"= href="{{url_for('static',filename='css/bootstrap.min.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/mystyle.css')}}">
+</head>
+<body  id="bodysite">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light navbar fixed-top navbar navbar-dark bg-dark" style="height:100px" >
+ 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-	controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
+  		</button>
+
+  	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		 <a class="navbar-brand" href="#">Centro Sportivo</a>
+    		<ul class="navbar-nav mr-auto">
+      			<li class="nav-item active">
+        			<a class="nav-link" href="{{ url_for('info') }}">Info e Contatti<span class="sr-only">(current)</span></a>
+      			</li>	
+    		</ul>
+	 {% with errori = get_flashed_messages() %}
+            {% if errori %}
+                {% for errore in errori %}
+			 <div class="alert alert-danger" id="wrong" role="alert">{{ errore }}</div> 
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    <form class="form-inline my-2 my-lg-0" method="POST" action="{{url_for('login')}}">
+    	<div class="form-group">
+
+    		<label for="username"  style="color:blue;margin-right: 5px;">Username</label>
+    		<input type="text" class="form-control" name="username" id="exampleInputUser1" placeholder="Enter user" style="margin-right: 15px;" maxlength="10" required > 		  
+    		<label for="password" style="color:blue;margin-right: 5px;" >Password</label>
+    		<input type="password" class="form-control" name="pw" id="exampleInputPassword1" placeholder="Enter password" maxlength="10" required >
+  	</div>
+ 	<button type="submit" class="btn btn-primary">Accedi</button>
+    </form>
+	<a href="{{ url_for('register') }}" style="position:absolute ;right:50px ;top: 70px;">Sei non sei ancora registrarto clicca qui</a>
+</nav>
+  
+
+<div class="bd-example">
+  <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+      <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+      <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+      <div class="carousel-item active" style="background-image: url(/static/images/Stadio.jpg)">
+        <img src="{{url_for('static',filename='images/campo1.png')}}" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h1  style="color:#ffffff">Benvenuti nel nostro sito</h1>
+          <h3 style="color: #ffffff">Per tutti quelli che amano il gioco del calcio</h3>
+        </div>
+      </div>
+      <div class="carousel-item" style="background-image: url(/static/images/tifo.jpg)">
+        <img src="{{url_for('static',filename='images/campo4.jpg')}}" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h1 style="color:  #000000">Siamo il piu grande centro sportivo del tuo territorio</h1>
+          <h3 style="color:  #000000">Ben 3 diversi campi per le tue sfide </h3>
+        </div>
+      </div>
+      <div class="carousel-item" style="background-image: url(/static/images/tifo2.jpg)">
+        <img src="{{url_for('static',filename='images/campo5.jpg')}}" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <h1 style="color:  #000000">Puoi gestire da qui le tue prenotazioni  </h1>
+          <h3 style="color:  #000000">Iscriviti ,prepara le scarpette che siamo pronti per il calcio d inizio .</h3>
+        </div>
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src=" {{url_for('static',filename='js/bootstrap.min.js')}}"></script>
+</body>
+</html>

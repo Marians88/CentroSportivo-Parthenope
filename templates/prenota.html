@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+	<meta charset="UTF-8">
+	<title>Prenota</title>
+	<link rel="stylesheet"= href="{{url_for('static',filename='css/bootstrap.min.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/prenota.css')}}">
+</head>
+<body  id="bodysite">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <h3 class="navbar-brand" >Effettua qui la tua prenotazione</h3>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('index') }}">Indietro</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <br></br>
+  <div class="form">
+	{% with errori = get_flashed_messages() %}
+            {% if errori %}
+                {% for errore in errori %}
+	
+			 <div class="alert alert-success">{{ errore }}<br/>
+  					Fai clic <a href="{{url_for('home')}}" class="alert-link">qui</a> per tornare alla home 
+			  </div>
+
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+	<form class="trasparent" method="POST"action="{{url_for('prenota')}}">
+	<div class="form-inner">									
+								
+		<table width="500" border="0">
+			<tr>
+			<td> </td>
+			<td colspan="2"><h1>Richiesta di prenotazione </h1></td>
+			
+			</tr>
+			<br></br> <br></br>
+			<tr> 
+			<td align="right">  nome: </td>
+			<td><input type="text" name="nome" size="45" value="" maxlength="15" required></td>
+			<td> </td>
+			</tr>
+				
+			<tr> 
+			<td align="right">  cognome: </td>
+			<td><input type="text" name="cognome" size="45" value="" maxlength="15" required></td>
+			<td> </td>
+			</tr>
+			<tr>
+	 
+			<td align="right">  indirizzo: </td>
+			<td>
+			<input type="text" name="indirizzo" size="45" value="" maxlength="25" required>
+			</td>
+			<td> </td>
+			</tr>
+			
+			 
+			<td align="right">  telefono: </td>
+			<td><input type="text" name="telefono" size="15" value="" maxlength="15" required></td>
+			<td> </td>
+			</tr>
+								
+			<tr> 
+			<td align="right">  e-mail: </td>
+			<td><input type="text" name="email" size="45" value="" maxlength="35" required></td>
+			<td> </td>
+			</tr>
+
+			
+<tr>
+  <td> </td>
+  <td><br><input type="submit" value="Conferma"><br><br></td>
+										<td> </td>
+									</tr>
+									 <tr>
+										<td> </td>
+										<td>
+											<h5>Ogni richiesta è subordinata alla conferma</h5> 
+										</td>
+									</tr>
+</table>
+<div/>
+</form>
+
+</div>
+
+	
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src=" {{url_for('static',filename='js/bootstrap.min.js')}}"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
