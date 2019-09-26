@@ -1,0 +1,20 @@
+#bodysite{
+
+background-image: 
+ background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.navbar navbar navbar-expand-lg navbar-light bg-light navbar fixed-top 
+{
+	background-color: powderblue
+}
+	
+.carousel-inner
+{
+	background-size: cover;
+	background-position: center center;
+}
+
+
+
