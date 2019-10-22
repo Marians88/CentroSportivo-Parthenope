@@ -18,6 +18,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
+		    <img id="immagin" src="{{url_for('static',filename='images/logo/logo.jpg')}}"width="94" height="55" alt="Inserisci Immagine" style="position:relative;right:40px"> </img>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
             <a class="nav-link" href="{{url_for('home')}}">Indietro</a>
@@ -70,19 +71,29 @@
 
          </h3>
 	 {% set pren = session.database.prenotazione.find({'user':session['username']}) %}	  
-		 	{% for p in pren%} 	
+	 {% for p in pren%} 
+	 {% set camp = session.database.campi.find({'_id':p.id_campo}) %}
+	 {% for c in camp%}
+	
          		<div class="events-wrapper">
+				{% if c.manutenzione == "false"%}
             			<div class="event">
                				<i class="ion ion-ios-flame hot"></i>
-               				<h4 class="event__point">Campo: {{ p.campo }} </h4>
+               				<h4 class="event__point">Campo: {{ c.tipo }} </h4> 
                				Mese: <span id="event__duration1" name="mese">{{p.mese}}</span> 
 	       				Giorno: <span id="event__duration2" name="giorno" >{{p.giorno}}</span>
 	       				Ora: <span id="event__duration3" name="ora">{{p.ora}}</span>:00		
             			</div>
 				<form method="POST" action="{{url_for('elimina')}}" >   
 				<button class="add-event-button" name=bottone type=submit value={{p._id}}><span class="add-event-button">Elimina</span> </button>
-				</form>    
+				</form>  
+				{%else%}
+					<h5>AVVISO IMPORTANTE!!!</h5>
+					<p>Siamo spiacenti ma per un problema di manutenzione l' appuntamento in data {{p.giorno}}/{{p.mese}} 
+					    delle ore {{p.ora}}:00 al momento non è disponibile per maggiori info contattare al numero 						    telefonico</p>		
+				{%endif%}  
 			</div>
+			{% endfor %}
 	 		{% endfor %}    		
       </div>
    </section>

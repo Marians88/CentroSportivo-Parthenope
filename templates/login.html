@@ -11,9 +11,11 @@
  		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-	controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
          <span class="navbar-toggler-icon"></span>
   		</button>
-
+	{% set name = session.database.societa.find() %}
+	{% for n in name%}
   	<div class="collapse navbar-collapse" id="navbarSupportedContent">
-		 <a class="navbar-brand" href="#">Centro Sportivo</a>
+		 <a class="navbar-brand" href="#">{{n.nome}}</a>
+	{% endfor %}    	
     		<ul class="navbar-nav mr-auto">
       			<li class="nav-item active">
         			<a class="nav-link" href="{{ url_for('info') }}">Info e Contatti<span class="sr-only">(current)</span></a>
@@ -22,7 +24,8 @@
 	 {% with errori = get_flashed_messages() %}
             {% if errori %}
                 {% for errore in errori %}
-			 <div class="alert alert-danger" id="wrong" role="alert">{{ errore }}</div> 
+						
+				<div class="alert alert-danger" id="wrong" role="alert" style="position:relative;top:9px">{{ errore }}</div>
                 {% endfor %}
             {% endif %}
         {% endwith %}
@@ -80,6 +83,7 @@
     </a>
   </div>
 </div>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src=" {{url_for('static',filename='js/bootstrap.min.js')}}"></script>

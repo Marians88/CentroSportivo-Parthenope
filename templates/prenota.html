@@ -5,12 +5,13 @@
 	<meta charset="UTF-8">
 	<title>Prenota</title>
 	<link rel="stylesheet"= href="{{url_for('static',filename='css/bootstrap.min.css')}}">
-	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/prenota.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/prenotaz.css')}}">
 </head>
 <body  id="bodysite">
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-      <h3 class="navbar-brand" >Effettua qui la tua prenotazione</h3>
+      <img id="immagin" src="{{url_for('static',filename='images/logo/logo.jpg')}}"width="94" height="55" alt="Inserisci Immagine" style="position:relative;right:20px"> </img>
+      <h3 class="navbar-brand" style="position:relative;left:20px">Effettua qui la tua prenotazione</h3>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -23,80 +24,78 @@
       </div>
     </div>
   </nav>
-  <br></br>
-  <div class="form">
+  <hr><hr><hr>
+  <div id="prenotazione" style="margin:100px;">
 	{% with errori = get_flashed_messages() %}
             {% if errori %}
                 {% for errore in errori %}
 	
 			 <div class="alert alert-success">{{ errore }}<br/>
-  					Fai clic <a href="{{url_for('home')}}" class="alert-link">qui</a> per tornare alla home 
-			  </div>
+			 </div>
 
                 {% endfor %}
             {% endif %}
         {% endwith %}
-	<form class="trasparent" method="POST"action="{{url_for('prenota')}}">
-	<div class="form-inner">									
-								
-		<table width="500" border="0">
-			<tr>
-			<td> </td>
-			<td colspan="2"><h1>Richiesta di prenotazione </h1></td>
-			
-			</tr>
-			<br></br> <br></br>
+	{% set campi = session.database.campi.find({}) %}
+	{% for p in campi%}
+		{% if p.manutenzione=="false"%}	
+		<div class="my class">
+			<h5>TIPOLOGIA DI CAMPO:{{ p.tipo }}.</h5>
+			<h5>IMPIANTO DI RISCALDAMENTO:{{p.riscaldamento}}.</h5>			
+			<h5>IMPIANTO ILLUMINAZIONE::gode di ben {{p.riflettori}} riflettori.</h5>
+			<h5>IRRIGAZIONE:impianto {{p.irrigazione}}.</h5> 				
+			<h5>STATO DEL CAMPO: {{p.stato}}</h5>
 			<tr> 
-			<td align="right">  nome: </td>
-			<td><input type="text" name="nome" size="45" value="" maxlength="15" required></td>
-			<td> </td>
-			</tr>
-				
-			<tr> 
-			<td align="right">  cognome: </td>
-			<td><input type="text" name="cognome" size="45" value="" maxlength="15" required></td>
-			<td> </td>
-			</tr>
-			<tr>
-	 
-			<td align="right">  indirizzo: </td>
+			<td align="right">  <h5>DATA:</h5></td>
 			<td>
-			<input type="text" name="indirizzo" size="45" value="" maxlength="25" required>
+			<form class="myform" method="POST" action="{{url_for('prenotazione')}}" >
+
+			<select name="giorno"><option value="1">1</option>
+				<option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
+				<option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option>
+				<option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option>
+				<option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option>
+				<option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option>
+				<option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option>
+				<option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option>
+				<option value="30">30</option><option value="31">31</option>
+			</select>
+
+			<select name="mese"><option value="gennaio">gennaio</option><option value="febbraio">febbraio</option><option value="marzo">marzo</option>
+				<option value="aprile">aprile</option><option value="maggio">maggio</option><option value="giugno">giugno</option><option value="luglio">luglio</option>
+				<option value="agosto">agosto</option><option value="settembre">settembre</option><option value="ottobre">ottobre</option><option value="novembre">novembre</option>
+				<option value="dicembre">dicembre</option>
+			</select>
+	
+			<select name="orario"><option value="16" selected>16:00</option><option value="17" >17:00</option><option value="18" >18:00</option>
+			        <option value="19" >19:00</option><option value="20" >20:00</option><option value="21" >21:00</option><option value="22" >22:00</option>
+				<option value="23" >23:00</option>
+			</select>
+
 			</td>
 			<td> </td>
-			</tr>
-			
-			 
-			<td align="right">  telefono: </td>
-			<td><input type="text" name="telefono" size="15" value="" maxlength="15" required></td>
-			<td> </td>
-			</tr>
-								
-			<tr> 
-			<td align="right">  e-mail: </td>
-			<td><input type="text" name="email" size="45" value="" maxlength="35" required></td>
-			<td> </td>
-			</tr>
+		</tr>	
+		<br></br>					
+		  	<button class="add-event-button" type="submit" name="bottone" value="{{p._id}}">Prenota</button>
+			</form>
+		 </div>
+		{% if p.tipo=="calcio" %}
+			<img id="immagin" src="{{url_for('static',filename='images/LogoCalcio.jpg')}}" width="350" height="275" alt="Inserisci 				Immagine" align="right" style="position:relative;bottom:250px"> </img>
+		{% elif p.tipo=='calcetto'%}
+			<img id="immagin" src="{{url_for('static',filename='images/LogoCalcetto.jpg')}}" width="350" height="275"alt="Inserisci Immagine" align="right" style="position:relative;bottom:250px"> </img>
+		
+		{%else%}
+			<img id="immagin" src="{{url_for('static',filename='images/LogoCalciotto.jpg')}}" width="350" height="275" alt="Inserisci 				Immagine" align="right" style="position:relative;bottom:250px"> </img>
+		{% endif%}
+		<hr><hr>
+		{%endif%}
+	{% endfor %}    
+  </div>
+		
+<hr><hr>
+<footer class="py-5 bg-dark" style="margin:0px">
 
-			
-<tr>
-  <td> </td>
-  <td><br><input type="submit" value="Conferma"><br><br></td>
-										<td> </td>
-									</tr>
-									 <tr>
-										<td> </td>
-										<td>
-											<h5>Ogni richiesta è subordinata alla conferma</h5> 
-										</td>
-									</tr>
-</table>
-<div/>
-</form>
-
-</div>
-
-	
+</footer>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src=" {{url_for('static',filename='js/bootstrap.min.js')}}"></script>

@@ -16,10 +16,20 @@
   	<div class="collapse navbar-collapse" id="navbarSupportedContent">
     		
         	<ul class="navbar-nav">
-            		<a class="nav-item nav-link active" href="{{ url_for('richiesta') }}">PRENOTA</a>
-			<a class="nav-item nav-link active" href="{{ url_for('agenda') }}">AGENDA</a>
-          		<a class="nav-item nav-link active" href="{{ url_for('galleria_calcio') }}">GALLERIA </a>
-			<a class="nav-item nav-link active" href="{{ url_for('logout')}}">LOGOUT</a>
+			{% if session['username'] == "admin" %}
+                		<a class="nav-item nav-link active" href="{{ url_for('modifica') }}">MODIFICA INFO </a>
+				<a class="nav-item nav-link active" href="{{ url_for('modifica_campo') }}">AGGIUNGI CAMPI</a>
+				<a class="nav-item nav-link active" href="{{ url_for('aggiungi_logo') }}">AGGIUNGI LOGO</a>
+				<a class="nav-item nav-link active" href="{{ url_for('gestione_campi') }}">GESTIONE CAMPI</a>
+				<a class="nav-item nav-link active" href="{{ url_for('logout')}}">LOGOUT</a>
+            		{%else%}
+			<img id="immagin" src="{{url_for('static',filename='images/logo/logo.jpg')}}"width="114" height="75" alt="Inserisci Immagine" > </img>
+            		<a class="nav-item nav-link active" href="{{ url_for('prenota') }}"style="position:relative;top:20px;left:20px">PRENOTA</a>
+			<a class="nav-item nav-link active" href="{{ url_for('agenda') }}"style="position:relative;top:20px;left:20px">AGENDA</a>
+          		<a class="nav-item nav-link active" href="{{ url_for('galleria_calcio') }}"style="position:relative;top:20px;left:20px">GALLERIA </a>
+			<a class="nav-item nav-link active" href="{{ url_for('logout')}}"style="position:relative;top:20px;left:20px">LOGOUT</a>
+			
+			{% endif %}
         	</ul>
     	</div>
     		<span class="navbar-text">Accesso effettuato come {{session['username']}}</span>
