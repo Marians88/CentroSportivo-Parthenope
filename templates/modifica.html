@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+	<meta charset="UTF-8">
+	<title>Modifica</title>
+	<link rel="stylesheet"= href="{{url_for('static',filename='css/bootstrap.min.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/modifica.css')}}">
+</head>
+<body  id="bodysite">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <h3 class="navbar-brand" >Effettua qui le tue modifiche</h3>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('index') }}">Indietro</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <br></br>
+  <div class="form">
+	<div class="form-inner">									
+								
+		<table width="500" border="0">
+			<tr>
+			<td> </td>
+			<td colspan="2"><h2>Personalizza la tua pagina informazioni</h2></td>
+			
+			</tr>
+			<br></br> <br></br>
+			<tr> 
+				<form class="trasparent" method="POST" action="{{url_for('aggiungi_nome')}}">
+				<td align="right"> Nome Societa: </td>
+				<td><input type="text" name="nomesoc" size="45" value=""  maxlength="15" ></td>
+				<td><button type="submit" class="btn btn-secondary">Modifica</button></td>
+				<td> </td>
+				</form>
+			</tr>
+			<tr> 
+				<form class="trasparent" method="POST" action="{{url_for('aggiungi_indirizzo')}}">
+				<td align="right"> Indirizzo: </td>
+				<td><input type="text" name="indsoc" size="45" value="" maxlength="15" required></td>
+				<td><button type="submit" class="btn btn-secondary">Modifica</button></td>
+				<td> </td>
+				</form>
+			</tr>
+			<tr> 
+				<form class="trasparent" method="POST" action="{{url_for('aggiungi_telefono')}}">
+				<td align="right"> Telefono: </td>
+				<td><input type="number" name="telsoc" size="45" value="" maxlength="15" ></td>
+				<td><button type="submit" class="btn btn-secondary">Modifica</button></td>
+				<td> </td>
+				</form>
+			</tr>
+			<tr> 
+				<form class="trasparent" method="POST" action="{{url_for('aggiungi_email')}}">
+				<td align="right"> Email: </td>
+				<td><input type="email" name="emailsoc" size="45" value="" maxlength="30" ></td>
+				<td><button type="submit" class="btn btn-secondary">Modifica</button></td>
+				<td> </td>
+				</form>
+			</tr>
+			<tr>
+ 				<td align="right"> Latitudine: </td>
+				<td><input type="number" name="latsoc" size="45" value="" maxlength="30" ></td>
+				<td><button type="submit" class="btn btn-secondary">Modifica</button></td>
+				<td> </td>
+			</tr>
+			<tr>
+ 				<td align="right"> Longitudine: </td>
+				<td><input type="number" name="longsoc" size="45" value="" maxlength="30" ></td>
+				<td><button type="submit" class="btn btn-secondary">Modifica</button></td>
+				<td> </td>
+			</tr>
+			
+			<tr>
+				<td> </td><!-- Content Row -->
+				<td>
+				<h5>Ogni richiesta è subordinata alla conferma</h5> 
+				</td>
+			</tr>
+		</table>
+	<div/>
+	</form>
+
+</div>
+
+	
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src=" {{url_for('static',filename='js/bootstrap.min.js')}}"></script>
+</body>
+</html>
+
