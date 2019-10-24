@@ -69,7 +69,7 @@
                				<span> <p style="color:white">Tipo:{{c.tipo}}</p</span> 
 	       				<span> <p style="color:white">Stato:{{c.stato}}</span>		
             			</div>
-				<img id="immagin" src="{{url_for('static',filename='images/logo/logo4.jpg')}}" width="70" height="75" alt="Inserisci 				Immagine" align="right" style="position:relative;bottom:70px"> </img>
+				<img id="immagin" src="{{url_for('static',filename='images/logo/logo4.jpg')}}" width="70" height="75" alt="Inserisci 				Immagine" align="right" style="position:relative;bottom:70px"> 
 				 
 				{% if c.manutenzione == "false"%}
 				<form method="POST" action="{{url_for('attiva_manutenzione')}}">
